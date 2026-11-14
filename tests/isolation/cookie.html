@@ -1,0 +1,5 @@
+<!doctype html><meta charset="utf-8"><title>Cookie test</title><style>body{font:22px system-ui;padding:20px}</style>
+<script>
+if (location.search.includes('set')) { document.cookie = 'veyscape_test=' + location.search.split('=')[1] + '; max-age=3600; path=/'; localStorage.setItem('veyscape_test', 'yes'); }
+document.write('<h2>cookie: [' + document.cookie + ']</h2><h2>localStorage: [' + localStorage.getItem('veyscape_test') + ']</h2>');
+</script>

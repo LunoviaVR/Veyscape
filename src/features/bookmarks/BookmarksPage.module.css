@@ -1,0 +1,62 @@
+.leafIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--control-size);
+  color: var(--color-text-muted);
+}
+
+.iconGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 22rem;
+  margin: 0 0 var(--space-2) 3.5rem;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.tint {
+  display: inline-grid;
+  place-items: center;
+}
+
+.import {
+  margin-bottom: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.importTitle {
+  margin: 0 0 var(--space-1);
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.importRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.fileButton:focus-within {
+  outline: 2px solid var(--color-focus);
+}
+
+.ok {
+  margin: var(--space-3) 0 0;
+  color: var(--color-success);
+}
+
+.error {
+  margin: var(--space-3) 0 0;
+  color: var(--color-danger);
+}
+
+.moveSelect {
+  flex: none;
+  width: 11rem;
+}

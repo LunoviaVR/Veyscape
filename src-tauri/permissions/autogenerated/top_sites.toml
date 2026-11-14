@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-top-sites"
+description = "Enables the top_sites command without any pre-configured scope."
+commands.allow = ["top_sites"]
+
+[[permission]]
+identifier = "deny-top-sites"
+description = "Denies the top_sites command without any pre-configured scope."
+commands.deny = ["top_sites"]

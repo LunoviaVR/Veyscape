@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-bookmark-import-browser"
+description = "Enables the bookmark_import_browser command without any pre-configured scope."
+commands.allow = ["bookmark_import_browser"]
+
+[[permission]]
+identifier = "deny-bookmark-import-browser"
+description = "Denies the bookmark_import_browser command without any pre-configured scope."
+commands.deny = ["bookmark_import_browser"]

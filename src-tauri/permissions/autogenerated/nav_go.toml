@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-nav-go"
+description = "Enables the nav_go command without any pre-configured scope."
+commands.allow = ["nav_go"]
+
+[[permission]]
+identifier = "deny-nav-go"
+description = "Denies the nav_go command without any pre-configured scope."
+commands.deny = ["nav_go"]

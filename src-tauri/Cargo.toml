@@ -1,0 +1,62 @@
+[package]
+name = "veyscape"
+version = "0.1.0"
+description = "Veyscape: a privacy-first desktop browser"
+edition = "2021"
+rust-version = "1.85"
+publish = false
+
+[lib]
+name = "veyscape_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.7", features = [] }
+
+[dependencies]
+# `unstable` enables Window::add_child (multi-webview); see docs/decisions/0002-overlay-child-webview.md
+tauri = { version = "2.12", features = ["unstable"] }
+tauri-plugin-opener = "2.7"
+tauri-plugin-single-instance = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+log = "0.4"
+url = "2.5"
+addr = "0.15"
+base64 = "0.22"
+# Already built for tauri-codegen; used to shrink bookmark favicons and draw them in menus.
+png = "0.18"
+rusqlite = { version = "0.40", features = ["bundled"] }
+# `single-thread` (default) makes Engine !Send; we build engines off the UI thread.
+adblock = { version = "0.13.5", default-features = false, features = ["embedded-domain-resolver", "full-regex-handling"] }
+ureq = "3"
+
+[target.'cfg(windows)'.dependencies]
+webview2-com = "0.39"
+windows-core = "0.62"
+# Already used by `windows`; named directly for the Windows Hello result type.
+windows-future = "0.3"
+windows = { version = "0.62", features = [
+  "Security_Credentials_UI",
+  "Win32_Foundation",
+  "Win32_Graphics_Gdi",
+  "Win32_Security_Cryptography",
+  "Win32_System_Com",
+  "Win32_System_LibraryLoader",
+  "Win32_System_WinRT",
+  "Win32_UI_Input_KeyboardAndMouse",
+  "Win32_UI_WindowsAndMessaging",
+] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
+
+# Dependencies are optimized in dev builds too. Unoptimized, one ad-block check took up to ~100 ms
+# on the UI thread, which WebView2 waits on for every request, so pages froze while loading.
+[profile.dev.package."*"]
+opt-level = 3

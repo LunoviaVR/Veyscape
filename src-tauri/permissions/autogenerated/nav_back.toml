@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-nav-back"
+description = "Enables the nav_back command without any pre-configured scope."
+commands.allow = ["nav_back"]
+
+[[permission]]
+identifier = "deny-nav-back"
+description = "Denies the nav_back command without any pre-configured scope."
+commands.deny = ["nav_back"]

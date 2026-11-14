@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-filter-lists-update"
+description = "Enables the filter_lists_update command without any pre-configured scope."
+commands.allow = ["filter_lists_update"]
+
+[[permission]]
+identifier = "deny-filter-lists-update"
+description = "Denies the filter_lists_update command without any pre-configured scope."
+commands.deny = ["filter_lists_update"]

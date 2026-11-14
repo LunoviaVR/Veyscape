@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><title>Isolation test</title>
+<style>body{font:20px system-ui;padding:20px} .ok{color:green} .bad{color:red}</style>
+<h2>Veyscape isolation test</h2><ul id="r"></ul>
+<script>
+const out = (name, pass, detail) => { const li = document.createElement('li'); li.className = pass ? 'ok' : 'bad'; li.textContent = (pass ? 'PASS ' : 'FAIL ') + name + ': ' + detail; document.getElementById('r').append(li); };
+out('no __TAURI_INTERNALS__', typeof window.__TAURI_INTERNALS__ === 'undefined', typeof window.__TAURI_INTERNALS__);
+out('no isTauri', typeof window.isTauri === 'undefined', String(window.isTauri));
+out('no __TAURI__', typeof window.__TAURI__ === 'undefined', typeof window.__TAURI__);
+out('no Edge token in user agent', !navigator.userAgent.includes('Edg/'), navigator.userAgent.split(' ').slice(-2).join(' '));
+const brands = (navigator.userAgentData?.brands ?? []).map((b) => b.brand).join(', ');
+out('no Edge in client-hint brands', !/edge/i.test(brands), brands || '(none)');
+const wv = window.chrome && window.chrome.webview;
+out('no chrome.webview bridge', !wv, wv ? 'present' : 'absent');
+fetch('http://ipc.localhost/browser_snapshot', { method: 'POST', body: '{}' })
+  .then(r => r.text().then(t => out('ipc.localhost unreachable', false, 'HTTP ' + r.status + ' ' + t.slice(0, 60))))
+  .catch(e => out('ipc.localhost unreachable', true, String(e).slice(0, 60)));
+const s = document.createElement('script');
+s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+s.onload = () => out('ad script blocked', false, 'loaded');
+s.onerror = () => out('ad script blocked', true, 'request failed');
+document.head.append(s);
+const img = new Image();
+img.onload = () => out('tracker pixel blocked', false, 'loaded');
+img.onerror = () => out('tracker pixel blocked', true, 'request failed');
+img.src = 'https://www.google-analytics.com/collect?v=1&t=pageview';
+</script>

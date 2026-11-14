@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-find-stop"
+description = "Enables the find_stop command without any pre-configured scope."
+commands.allow = ["find_stop"]
+
+[[permission]]
+identifier = "deny-find-stop"
+description = "Denies the find_stop command without any pre-configured scope."
+commands.deny = ["find_stop"]

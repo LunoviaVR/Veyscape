@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-site-exceptions-list"
+description = "Enables the site_exceptions_list command without any pre-configured scope."
+commands.allow = ["site_exceptions_list"]
+
+[[permission]]
+identifier = "deny-site-exceptions-list"
+description = "Denies the site_exceptions_list command without any pre-configured scope."
+commands.deny = ["site_exceptions_list"]

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-focus-content"
+description = "Enables the focus_content command without any pre-configured scope."
+commands.allow = ["focus_content"]
+
+[[permission]]
+identifier = "deny-focus-content"
+description = "Denies the focus_content command without any pre-configured scope."
+commands.deny = ["focus_content"]

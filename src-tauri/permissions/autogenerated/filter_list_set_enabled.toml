@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-filter-list-set-enabled"
+description = "Enables the filter_list_set_enabled command without any pre-configured scope."
+commands.allow = ["filter_list_set_enabled"]
+
+[[permission]]
+identifier = "deny-filter-list-set-enabled"
+description = "Denies the filter_list_set_enabled command without any pre-configured scope."
+commands.deny = ["filter_list_set_enabled"]

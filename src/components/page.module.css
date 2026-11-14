@@ -1,0 +1,132 @@
+.page {
+  height: 100%;
+  overflow-y: auto;
+  background: var(--color-surface);
+  user-select: text;
+}
+
+.column {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5) var(--space-6);
+}
+
+.wide {
+  max-width: 64rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.title {
+  flex: 1;
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.empty {
+  padding: var(--space-6) 0;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Shared list styles for History, Bookmarks and Downloads. */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 2.75rem;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+}
+
+.item:hover,
+.item:focus-within {
+  background: var(--color-hover);
+}
+
+.itemMain {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-1) 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  border-radius: var(--radius-sm);
+}
+
+.itemTitle,
+.itemSub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemTitle {
+  font-size: var(--text-md);
+}
+
+.itemSub {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.meta {
+  flex: none;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.groupHeading {
+  margin: var(--space-5) 0 var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.search {
+  width: 100%;
+  margin-bottom: var(--space-3);
+}
+
+.progress {
+  width: 100%;
+  height: 4px;
+  margin-top: 4px;
+  accent-color: var(--color-accent);
+}
+
+.linkTitle {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-accent);
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footnote {
+  margin-top: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}

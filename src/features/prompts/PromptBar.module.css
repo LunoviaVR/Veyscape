@@ -1,0 +1,32 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-chrome-raised);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: var(--space-1) var(--space-3);
+}
+
+.bar + .bar {
+  border-top: 1px solid var(--color-border);
+}
+
+.message {
+  flex: 1;
+  margin: 0;
+  font-size: var(--text-md);
+}
+
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}

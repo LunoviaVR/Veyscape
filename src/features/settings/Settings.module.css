@@ -1,0 +1,193 @@
+.layout {
+  display: flex;
+  height: 100%;
+  background: var(--color-surface);
+  /* Size queries below use this page's own width: a split pane is narrower than the window. */
+  container-type: inline-size;
+}
+
+.nav {
+  flex: none;
+  width: 14rem;
+  padding: var(--space-5) var(--space-3);
+  border-right: 1px solid var(--color-border);
+  background: var(--color-surface-muted);
+  overflow-y: auto;
+}
+
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navTitle {
+  margin: 0 0 var(--space-4) var(--space-3);
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.navItem {
+  width: 100%;
+  min-height: var(--control-size);
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  text-align: left;
+  font-size: var(--text-md);
+}
+
+.navItem:hover {
+  background: var(--color-hover);
+}
+
+.navItem[aria-current='page'] {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  user-select: text;
+}
+
+/* Same column as History (page.module.css), centred on the whole page rather than on the space
+   beside the section list; it never slides under the list (14rem + its 1px border). */
+.column {
+  max-width: 48rem;
+  margin-left: max(0px, calc(50cqw - 24rem - 14rem - 1px));
+  padding: var(--space-6) var(--space-5) var(--space-6);
+}
+
+.sectionTitle {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.group {
+  margin: var(--space-5) 0 0;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.group > * + * {
+  border-top: 1px solid var(--color-border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.brandName {
+  margin: 0 0 2px;
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.groupTitle {
+  margin: var(--space-5) 0 var(--space-2);
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+}
+
+.field label,
+.field .label {
+  font-size: var(--text-md);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.hint {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.error {
+  margin: var(--space-2) 0 0;
+  color: var(--color-danger);
+}
+
+.success {
+  margin: var(--space-2) 0 0;
+  color: var(--color-success);
+}
+
+.details {
+  margin-top: var(--space-5);
+}
+
+.details > summary {
+  min-height: var(--control-size);
+  font-size: var(--text-md);
+  font-weight: 600;
+  cursor: default;
+}
+
+.tableList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tableList li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 2.75rem;
+  padding: var(--space-1) 0;
+}
+
+.tableList li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+/* A list that is also a bordered box keeps the box's inner padding. */
+.group.tableList {
+  padding: 0 var(--space-4);
+}
+
+.grow {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wideInput {
+  flex: 1;
+  min-width: 12rem;
+}
+
+.note {
+  margin-top: var(--space-3);
+}

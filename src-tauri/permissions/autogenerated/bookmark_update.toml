@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-bookmark-update"
+description = "Enables the bookmark_update command without any pre-configured scope."
+commands.allow = ["bookmark_update"]
+
+[[permission]]
+identifier = "deny-bookmark-update"
+description = "Denies the bookmark_update command without any pre-configured scope."
+commands.deny = ["bookmark_update"]

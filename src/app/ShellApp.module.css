@@ -1,0 +1,70 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chrome {
+  flex: none;
+}
+
+.chrome[hidden] {
+  display: none;
+}
+
+.content {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: var(--color-surface);
+}
+
+.errorPage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 14vh var(--space-5) var(--space-6);
+  user-select: text;
+}
+
+.errorPage h1 {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.errorPage p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+}
+
+.errorIcon {
+  color: var(--color-warning);
+}
+
+.errorActions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+/* Split view: web panes are native views placed over these boxes; gaps show the chrome colour. */
+.splitArea {
+  background: var(--color-chrome);
+}
+
+.pane {
+  position: absolute;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+/* Drawn in the gap around the pane, so it stays visible beside a native web view. */
+.activePane {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

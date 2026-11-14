@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-bookmark-create-folder"
+description = "Enables the bookmark_create_folder command without any pre-configured scope."
+commands.allow = ["bookmark_create_folder"]
+
+[[permission]]
+identifier = "deny-bookmark-create-folder"
+description = "Denies the bookmark_create_folder command without any pre-configured scope."
+commands.deny = ["bookmark_create_folder"]

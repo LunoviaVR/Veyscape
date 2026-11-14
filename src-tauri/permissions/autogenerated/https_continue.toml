@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-https-continue"
+description = "Enables the https_continue command without any pre-configured scope."
+commands.allow = ["https_continue"]
+
+[[permission]]
+identifier = "deny-https-continue"
+description = "Denies the https_continue command without any pre-configured scope."
+commands.deny = ["https_continue"]

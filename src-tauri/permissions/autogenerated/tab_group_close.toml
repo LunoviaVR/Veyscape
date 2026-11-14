@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-tab-group-close"
+description = "Enables the tab_group_close command without any pre-configured scope."
+commands.allow = ["tab_group_close"]
+
+[[permission]]
+identifier = "deny-tab-group-close"
+description = "Denies the tab_group_close command without any pre-configured scope."
+commands.deny = ["tab_group_close"]

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-tab-group-menu"
+description = "Enables the tab_group_menu command without any pre-configured scope."
+commands.allow = ["tab_group_menu"]
+
+[[permission]]
+identifier = "deny-tab-group-menu"
+description = "Denies the tab_group_menu command without any pre-configured scope."
+commands.deny = ["tab_group_menu"]

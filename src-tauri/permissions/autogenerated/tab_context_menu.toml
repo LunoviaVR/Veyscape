@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-tab-context-menu"
+description = "Enables the tab_context_menu command without any pre-configured scope."
+commands.allow = ["tab_context_menu"]
+
+[[permission]]
+identifier = "deny-tab-context-menu"
+description = "Denies the tab_context_menu command without any pre-configured scope."
+commands.deny = ["tab_context_menu"]

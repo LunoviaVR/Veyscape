@@ -1,0 +1,116 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: var(--toolbar-height);
+  padding: 0 var(--space-2);
+  background: var(--color-chrome-raised);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.address {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
+  height: var(--address-height);
+  margin: 0 var(--space-2);
+  padding: 0 4px 0 var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  background: var(--color-chrome);
+  transition: border-color var(--duration-fast), background-color var(--duration-fast);
+}
+
+.address:focus-within {
+  border-color: var(--color-focus);
+  background: var(--color-surface);
+}
+
+.privateAddress {
+  box-shadow: inset 0 0 0 1px var(--color-private);
+}
+
+.security {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  padding: 0 4px;
+  color: var(--color-text-muted);
+}
+
+.insecure {
+  color: var(--color-warning);
+}
+
+.notSecure {
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 var(--space-1);
+  border: 0;
+  background: transparent;
+  font-size: var(--text-md);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.input:focus-visible {
+  outline: none;
+}
+
+.chip {
+  flex: none;
+  height: 1.5rem;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: var(--text-xs);
+}
+
+.star {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+.star:hover {
+  background: var(--color-hover);
+}
+
+.starred {
+  color: var(--color-accent);
+}
+
+.badgeWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.activityDot {
+  position: absolute;
+  right: -3px;
+  bottom: -2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}

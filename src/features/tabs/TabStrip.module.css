@@ -1,0 +1,243 @@
+.strip {
+  display: flex;
+  align-items: flex-end;
+  height: var(--tabstrip-height);
+  padding-left: var(--space-2);
+  background: var(--color-chrome);
+}
+
+/* A private window: tinted strip and a badge, so it is never mistaken for a normal one. */
+.privateStrip {
+  background: color-mix(in srgb, var(--color-private) 22%, var(--color-chrome));
+}
+
+.privateBadge {
+  display: inline-flex;
+  flex: none;
+  align-self: center;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: var(--space-2);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-private);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+/* The dark theme's private colour is light; white text on it would be hard to read. */
+:root[data-theme='dark'] .privateBadge {
+  color: #111;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding-top: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1 1 var(--tab-max-width);
+  min-width: var(--tab-min-width);
+  max-width: var(--tab-max-width);
+  height: var(--tab-height);
+  padding: 0 4px 0 var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  transition: background-color var(--duration-fast);
+}
+
+.tab:hover {
+  background: var(--color-hover);
+}
+
+.tab[aria-selected='true'] {
+  background: var(--color-chrome-raised);
+  color: var(--color-text);
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.tab:focus-visible {
+  outline-offset: -2px;
+}
+
+.pinned {
+  flex: none;
+  width: 2.5rem;
+  min-width: 2.5rem;
+  justify-content: center;
+  padding: 0;
+}
+
+.private {
+  box-shadow: inset 0 -2px 0 var(--color-private);
+}
+
+.tab[aria-selected='true'].private {
+  box-shadow: 0 0 0 1px var(--color-border), inset 0 -2px 0 var(--color-private);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.icon img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  mask-image: linear-gradient(to right, #000 85%, transparent);
+}
+
+.pinMark {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  color: var(--color-text-muted);
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  opacity: 0;
+}
+
+.tab:hover .close,
+.tab[aria-selected='true'] .close {
+  opacity: 1;
+}
+
+.close:hover {
+  background: var(--color-pressed);
+}
+
+.newTab {
+  margin-left: 2px;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.windowControls {
+  display: flex;
+  align-self: stretch;
+  margin-left: var(--space-3);
+}
+
+.windowButton {
+  display: grid;
+  place-items: center;
+  width: var(--window-control-width);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.windowButton:hover {
+  background: var(--color-hover);
+}
+
+.closeWindow:hover {
+  background: #c42b1c;
+  color: #fff;
+}
+
+/* Tab groups */
+.grouped {
+  box-shadow: inset 0 -2px 0 var(--group-color);
+}
+
+.tab[aria-selected='true'].grouped {
+  box-shadow: 0 0 0 1px var(--group-color), inset 0 -2px 0 var(--group-color);
+}
+
+.groupChip {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  max-width: 10rem;
+  height: 1.5rem;
+  margin: 0 2px 0 6px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--group-color);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+:root[data-theme='dark'] .groupChip {
+  color: #111;
+}
+
+.groupChip:hover {
+  filter: brightness(1.1);
+}
+
+/* A dragged tab is over this group: dropping it adds it to the group. */
+.groupDrop {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.groupCollapsed {
+  border-radius: var(--radius-sm);
+  box-shadow: 3px 0 0 -1px var(--group-color), 6px 0 0 -2px var(--group-color);
+}
+
+.groupChip > svg {
+  flex: none;
+}
+
+.groupName {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.splitMark {
+  flex: none;
+  color: var(--color-accent);
+}

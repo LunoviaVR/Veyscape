@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-tab-set-pinned"
+description = "Enables the tab_set_pinned command without any pre-configured scope."
+commands.allow = ["tab_set_pinned"]
+
+[[permission]]
+identifier = "deny-tab-set-pinned"
+description = "Denies the tab_set_pinned command without any pre-configured scope."
+commands.deny = ["tab_set_pinned"]

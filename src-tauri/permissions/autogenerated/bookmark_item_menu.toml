@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-bookmark-item-menu"
+description = "Enables the bookmark_item_menu command without any pre-configured scope."
+commands.allow = ["bookmark_item_menu"]
+
+[[permission]]
+identifier = "deny-bookmark-item-menu"
+description = "Denies the bookmark_item_menu command without any pre-configured scope."
+commands.deny = ["bookmark_item_menu"]

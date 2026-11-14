@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-filter-list-remove"
+description = "Enables the filter_list_remove command without any pre-configured scope."
+commands.allow = ["filter_list_remove"]
+
+[[permission]]
+identifier = "deny-filter-list-remove"
+description = "Denies the filter_list_remove command without any pre-configured scope."
+commands.deny = ["filter_list_remove"]

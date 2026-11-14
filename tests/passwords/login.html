@@ -1,0 +1,28 @@
+<!doctype html><meta charset="utf-8"><title>Login test</title>
+<style>body{font:18px system-ui;padding:20px;max-width:40rem} form{display:grid;gap:8px;margin:12px 0;padding:12px;border:1px solid #bbb} #log{white-space:pre-wrap;background:#eee;padding:8px;font-size:14px}</style>
+<h2>Veyscape password manager test</h2>
+<p>Serve over http (e.g. <code>npm run dev</code>, then <code>http://localhost:1420/tests/passwords/login.html</code>); the password script does not run on file:// pages.</p>
+<h3>1. Login that navigates</h3>
+<p>Submit: the page reloads as "signed in" and Veyscape offers to save.</p>
+<form id="nav"><label>Email <input name="email" type="email" autocomplete="username"></label>
+<label>Password <input name="password" type="password" autocomplete="current-password"></label><button>Sign in</button></form>
+<h3>2. Single-page login (no navigation)</h3>
+<p>Password <code>wrong</code>: an error, the form stays, no offer. Anything else: the form goes away and Veyscape offers to save.</p>
+<div id="spaBox"><form id="spa"><label>Username <input name="user"></label>
+<label>Password <input name="pass" type="password"></label><button type="button" id="spaGo">Log in</button></form></div>
+<h3>Log</h3><pre id="log"></pre>
+<script>
+const log = (s) => (document.getElementById('log').textContent += s + '\n');
+if (location.search === '?signed-in') log('Signed in through form 1.');
+const bridge = () => 'page sees __vsPw: ' + typeof window.__vsPw + ', __vsFill: ' + typeof window.__vsFill + ' (both must be undefined)';
+setTimeout(() => log(bridge()), 1500);
+for (const i of document.querySelectorAll('input')) i.addEventListener('input', () => log('input event: ' + i.name));
+document.getElementById('nav').addEventListener('submit', (e) => { e.preventDefault(); location.assign(location.pathname + '?signed-in'); });
+document.getElementById('spaGo').addEventListener('click', () => {
+  const pass = document.querySelector('#spa [name=pass]').value;
+  setTimeout(() => {
+    if (pass === 'wrong') return log('Wrong password (form stays).');
+    document.getElementById('spaBox').textContent = 'Signed in through form 2.';
+  }, 500);
+});
+</script>

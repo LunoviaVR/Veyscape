@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-tab-group-update"
+description = "Enables the tab_group_update command without any pre-configured scope."
+commands.allow = ["tab_group_update"]
+
+[[permission]]
+identifier = "deny-tab-group-update"
+description = "Denies the tab_group_update command without any pre-configured scope."
+commands.deny = ["tab_group_update"]

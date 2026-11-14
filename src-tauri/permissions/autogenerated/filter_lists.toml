@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-filter-lists"
+description = "Enables the filter_lists command without any pre-configured scope."
+commands.allow = ["filter_lists"]
+
+[[permission]]
+identifier = "deny-filter-lists"
+description = "Denies the filter_lists command without any pre-configured scope."
+commands.deny = ["filter_lists"]

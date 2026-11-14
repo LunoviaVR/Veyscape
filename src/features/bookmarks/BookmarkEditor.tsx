@@ -80,7 +80,7 @@ export function BookmarkEditor({
       if (isFolder && !name) throw new Error('Enter a folder name.');
       if (editing) {
         const current = all.find((b) => b.id === request.id);
-        await api.library.updateBookmark(request.id!, name || address, isFolder ? { icon, color } : { url: address });
+        await api.library.updateBookmark(request.id!, name, isFolder ? { icon, color } : { url: address });
         if (current && current.parentId !== parent) await api.library.moveBookmark(request.id!, parent);
       } else if (isFolder) {
         await api.library.createFolder(parent, name, icon, color);

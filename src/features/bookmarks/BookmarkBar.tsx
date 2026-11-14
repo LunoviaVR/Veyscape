@@ -122,13 +122,14 @@ export function BookmarkBar() {
                 <button
                   type="button"
                   className={styles.item}
-                  title={`${b.title}\n${b.url}`}
+                  title={b.title ? `${b.title}\n${b.url}` : (b.url ?? '')}
+                  aria-label={b.title ? undefined : (b.url ?? '')}
                   onClick={(e) => open(b, e)}
                   onAuxClick={(e) => e.button === 1 && open(b, e)}
                   onContextMenu={(e) => contextMenu(b, e)}
                 >
                   <SiteIcon src={b.favicon} />
-                  <span className={styles.label}>{b.title}</span>
+                  {b.title && <span className={styles.label}>{b.title}</span>}
                 </button>
               )}
             </li>

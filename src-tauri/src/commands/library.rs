@@ -60,12 +60,15 @@ fn bookmarks_changed(app: &AppHandle) -> AppResult<()> {
     Ok(())
 }
 
-fn clean_title(title: &str) -> AppResult<&str> {
+/// Bookmarks may be untitled (the bar shows only their icon); folders need a name.
+fn clean_title(title: &str, folder: bool) -> AppResult<&str> {
     let title = title.trim();
-    if title.is_empty() || title.len() > 1024 {
-        return Err(AppError::InvalidInput(
-            "title must be 1–1024 characters".into(),
-        ));
+    if (folder && title.is_empty()) || title.len() > 1024 {
+        return Err(AppError::InvalidInput(if folder {
+            "folder name must be 1–1024 characters".into()
+        } else {
+            "title must be at most 1024 characters".into()
+        }));
     }
     Ok(title)
 }
@@ -88,9 +91,10 @@ pub fn bookmark_update(
     color: Option<String>,
     url: Option<String>,
 ) -> AppResult<()> {
+    let folder = svc.db.bookmark_get(id)?.kind == "folder";
     svc.db.bookmark_update(
         id,
-        clean_title(&title)?,
+        clean_title(&title, folder)?,
         icon.as_deref(),
         color.as_deref(),
         url.as_deref(),
@@ -139,7 +143,7 @@ pub fn bookmark_create_folder(
 ) -> AppResult<i64> {
     let id = svc.db.bookmark_create_folder(
         parent,
-        clean_title(&title)?,
+        clean_title(&title, true)?,
         icon.as_deref(),
         color.as_deref(),
     )?;

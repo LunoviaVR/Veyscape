@@ -91,12 +91,14 @@ export function BookmarksPage() {
   const row = (b: Bookmark, depth: number) => {
     const isFolder = b.kind === 'folder';
     const expanded = open.has(b.id);
+    // Untitled bookmarks (icon-only on the bar) are named by their address.
+    const name = b.title || b.url || '';
     return (
       <li key={b.id}>
         <div className={page.item} style={{ paddingLeft: `calc(${depth} * 1.25rem + var(--space-2))` }}>
           {isFolder ? (
             <IconButton
-              label={expanded ? `Collapse ${b.title}` : `Expand ${b.title}`}
+              label={expanded ? `Collapse ${name}` : `Expand ${name}`}
               aria-expanded={expanded}
               onClick={() => setOpen((s) => new Set(s.has(b.id) ? [...s].filter((x) => x !== b.id) : [...s, b.id]))}
             >
@@ -108,7 +110,7 @@ export function BookmarksPage() {
             </span>
           )}
           {isFolder && (
-            <IconButton label={`Change icon and colour of ${b.title}`} pressed={iconFor === b.id} onClick={() => setIconFor(iconFor === b.id ? null : b.id)}>
+            <IconButton label={`Change icon and colour of ${name}`} pressed={iconFor === b.id} onClick={() => setIconFor(iconFor === b.id ? null : b.id)}>
               <span className={styles.tint} style={b.color ? { color: groupColor(b.color) } : undefined}>
                 <FolderIcon name={b.icon} />
               </span>
@@ -132,13 +134,13 @@ export function BookmarksPage() {
             </span>
           ) : (
             <button type="button" className={page.itemMain} onClick={() => tab && b.url && void api.nav.go(tab.id, b.url)}>
-              <span className={page.itemTitle}>{b.title}</span>
+              <span className={page.itemTitle}>{b.title || 'No name'}</span>
               <span className={page.itemSub}>{b.url}</span>
             </button>
           )}
           <select
             className={`${controls.select} ${styles.moveSelect}`}
-            aria-label={`Move ${b.title} to`}
+            aria-label={`Move ${name} to`}
             value={b.parentId ?? BAR}
             onChange={(e: ChangeEvent<HTMLSelectElement>) =>
               void run(api.library.moveBookmark(b.id, e.target.value === BAR ? null : Number(e.target.value)), 'Moved')
@@ -158,16 +160,16 @@ export function BookmarksPage() {
               <Check size={15} />
             </IconButton>
           ) : (
-            <IconButton label={`Rename ${b.title}`} onClick={() => setEditing({ id: b.id, title: b.title })}>
+            <IconButton label={`Rename ${name}`} onClick={() => setEditing({ id: b.id, title: b.title })}>
               <Pencil size={15} />
             </IconButton>
           )}
-          <IconButton label={`Delete ${b.title}`} onClick={() => remove(b)}>
+          <IconButton label={`Delete ${name}`} onClick={() => remove(b)}>
             <Trash2 size={15} />
           </IconButton>
         </div>
         {iconFor === b.id && (
-          <div className={styles.iconGrid} aria-label={`Icon and colour for ${b.title}`}>
+          <div className={styles.iconGrid} aria-label={`Icon and colour for ${name}`}>
             <IconPicker
               value={b.icon ?? 'folder'}
               color={b.color}

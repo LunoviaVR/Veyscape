@@ -275,11 +275,8 @@ impl Db {
         let conn = self.conn();
         validate_parent(&conn, parent)?;
         let pos = next_position(&conn, parent)?;
-        let title = if title.trim().is_empty() {
-            url.as_str()
-        } else {
-            title.trim()
-        };
+        // An empty title is allowed: the bar then shows only the site icon.
+        let title = title.trim();
         let icon = known_favicon(&conn, &url)?;
         conn.execute(
             "INSERT INTO bookmarks (parent_id, kind, url, title, favicon, position, created_at) VALUES (?1, 'bookmark', ?2, ?3, ?4, ?5, ?6)",
@@ -428,11 +425,8 @@ fn insert_nodes(
     for (position, node) in nodes.iter().enumerate() {
         match node {
             ImportNode::Link { title, url, icon } => {
-                let title = if title.trim().is_empty() {
-                    url.as_str()
-                } else {
-                    title.trim()
-                };
+                // Untitled links stay untitled (icon-only on the bar, as in the source browser).
+                let title = title.trim();
                 tx.prepare_cached(
                     "INSERT INTO bookmarks (parent_id, kind, url, title, favicon, position, created_at) VALUES (?1, 'bookmark', ?2, ?3, ?4, ?5, ?6)",
                 )?
@@ -530,7 +524,8 @@ mod tests {
             .unwrap();
         assert_eq!(
             db.bookmark_get(id).unwrap().title,
-            "https://custom.example/x"
+            "",
+            "blank title stays blank"
         );
         assert!(db.bookmark_add(None, "Bad", "javascript:alert(1)").is_err());
         assert!(db
@@ -587,10 +582,7 @@ mod tests {
             .iter()
             .find(|b| b.url.as_deref() == Some("https://n.example/"))
             .unwrap();
-        assert_eq!(
-            (n.parent_id, n.title.as_str()),
-            (Some(news.id), "https://n.example/")
-        );
+        assert_eq!((n.parent_id, n.title.as_str()), (Some(news.id), ""));
         assert_eq!(n.favicon, None, "only PNG icons are kept");
         let a = all.iter().find(|b| b.title == "A").unwrap();
         assert_eq!(a.favicon, favicon::normalize(PNG_1X1));

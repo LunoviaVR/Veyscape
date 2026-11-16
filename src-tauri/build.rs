@@ -60,6 +60,7 @@ const COMMANDS: &[&str] = &[
     "permission_respond",
     "external_protocol_respond",
     "app_info",
+    "update_check",
     "bookmark_add",
     "bookmark_bar_menu",
     "bookmark_create_folder",

@@ -226,6 +226,12 @@ export interface AppInfo {
   platform: string;
 }
 
+export interface UpdateInfo {
+  latest: string;
+  available: boolean;
+  url: string;
+}
+
 export type TimeRange = 'lastHour' | 'lastDay' | 'lastWeek' | 'allTime';
 
 export interface ClearDataRequest {

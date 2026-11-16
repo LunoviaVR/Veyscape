@@ -4,6 +4,7 @@ import { emitTo, type UnlistenFn } from '@tauri-apps/api/event';
 import { getCurrentWebview } from '@tauri-apps/api/webview';
 import type {
   AppInfo,
+  UpdateInfo,
   Bookmark,
   ClearDataRequest,
   ImportSource,
@@ -162,6 +163,8 @@ export const api = {
   },
 
   appInfo: () => invoke<AppInfo>('app_info'),
+  /** One request to GitHub Releases; only on user request. */
+  checkForUpdates: () => invoke<UpdateInfo>('update_check'),
 };
 
 /** Backend → UI events. */

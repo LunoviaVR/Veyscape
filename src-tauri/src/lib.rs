@@ -14,6 +14,7 @@ pub mod privacy;
 pub mod shell;
 pub mod state;
 pub mod storage;
+pub mod updates;
 
 use std::sync::{Arc, RwLock};
 use tauri::Manager;
@@ -176,6 +177,7 @@ pub fn run() {
         commands::settings::permissions_list,
         commands::settings::permission_set,
         commands::settings::app_info,
+        commands::settings::update_check,
     ];
 
     let app = tauri::Builder::default()

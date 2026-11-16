@@ -80,7 +80,8 @@ notifications), external-protocol prompt, pop-up blocking prompt, HTTPS-only int
 showing, copying and editing a saved password (Windows Hello prompt; needs the owner's PIN), the
 "Update password?" offer, logins on real sites, clear browsing data, clear-on-exit, zoom indicator, print, full screen, bookmarks page editing,
 theme/density switching, keyboard-only and screen-reader passes, untitled (icon-only) bookmarks on
-the bar (a blank name is kept, also on import; folders still need a name).
+the bar (a blank name is kept, also on import; folders still need a name), Settings → About → "Check for updates"
+(GitHub Releases request verified with curl, version compare unit-tested; opens the release page in a tab).
 
 ## Known issues
 

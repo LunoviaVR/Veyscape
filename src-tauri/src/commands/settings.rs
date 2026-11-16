@@ -234,3 +234,11 @@ pub fn app_info() -> AppResult<AppInfo> {
         platform: std::env::consts::OS,
     })
 }
+
+/// Async so the network request never runs on the UI thread.
+#[tauri::command]
+pub async fn update_check() -> AppResult<crate::updates::UpdateInfo> {
+    tauri::async_runtime::spawn_blocking(|| crate::updates::check(env!("CARGO_PKG_VERSION")))
+        .await
+        .map_err(|e| AppError::Engine(e.to_string()))?
+}

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import logo from '../../../assets/logo.png';
-import { api } from '../../lib/ipc';
-import type { AppInfo } from '../../types/browser';
+import { api, errorMessage } from '../../lib/ipc';
+import { announce } from '../../lib/ui';
+import type { AppInfo, UpdateInfo } from '../../types/browser';
+import controls from '../../components/controls.module.css';
 import styles from './Settings.module.css';
 
 const LICENSES = [
@@ -18,6 +20,25 @@ const LICENSES = [
 export function AboutSection() {
   const [info, setInfo] = useState<AppInfo | null>(null);
   useEffect(() => void api.appInfo().then(setInfo), []);
+  const [checking, setChecking] = useState(false);
+  const [update, setUpdate] = useState<UpdateInfo | null>(null);
+  const [error, setError] = useState('');
+
+  const check = async () => {
+    setChecking(true);
+    setError('');
+    try {
+      const result = await api.checkForUpdates();
+      setUpdate(result);
+      announce(result.available ? `Veyscape ${result.latest} is available` : 'Veyscape is up to date');
+    } catch (e) {
+      setUpdate(null);
+      setError(`Could not check for updates: ${errorMessage(e)}`);
+    } finally {
+      setChecking(false);
+    }
+  };
+
   return (
     <>
       <div className={styles.brand}>
@@ -40,9 +61,36 @@ export function AboutSection() {
           <span className={styles.label}>Web engine</span>
           <span data-selectable>{info?.engine ?? '…'}</span>
         </div>
-        <div className={styles.field}>
-          <span className={styles.label}>Updates</span>
-          <span>Veyscape never checks for updates in the background. New versions are published on GitHub.</span>
+        <div className={styles.stack}>
+          <div className={styles.row}>
+            <span className={`${styles.label} ${styles.grow}`}>Updates</span>
+            <button type="button" className={controls.button} disabled={checking} onClick={() => void check()}>
+              {checking ? 'Checking…' : 'Check for updates'}
+            </button>
+          </div>
+          <p className={styles.hint}>
+            Veyscape never checks in the background. The button asks GitHub for the latest release, nothing else is sent.
+          </p>
+          {update &&
+            (update.available ? (
+              <div className={styles.row}>
+                <span className={styles.grow}>Veyscape {update.latest} is available.</span>
+                <button
+                  type="button"
+                  className={`${controls.button} ${controls.primary}`}
+                  onClick={() => void api.tabs.create({ url: update.url })}
+                >
+                  Open download page
+                </button>
+              </div>
+            ) : (
+              <p className={styles.success}>You have the latest version ({update.latest}).</p>
+            ))}
+          {error && (
+            <p className={styles.error} role="alert">
+              {error}
+            </p>
+          )}
         </div>
       </div>
       <p className={`${styles.hint} ${styles.note}`}>

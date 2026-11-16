@@ -150,7 +150,12 @@ that finds no form reports an error and does not count as a use. Values travel a
   (redirects too), with a 5-minute limit; lists over 16 MB are rejected rather than cut short, and
   anything that looks like HTML is rejected. Cosmetic rules that could act as CSS at-rules (`@`, `;`,
   braces) are dropped before they reach a page.
-- No proxy, no MITM, no traffic leaves the machine except page loads and filter-list downloads.
+- No proxy, no MITM, no traffic leaves the machine except page loads, filter-list downloads and the
+  manual update check.
+- **Update check** (Settings → About → Check for updates, `updates.rs`): only when the user presses
+  the button, one HTTPS GET to the GitHub Releases API with a plain `Veyscape` User-Agent, 15 s limit.
+  Nothing is downloaded or installed; the release page opens in a normal tab, and a release URL
+  outside `github.com/LunoviaVR/Veyscape/releases/` is replaced by that releases page.
 
 ## Known limitations and residual risk
 

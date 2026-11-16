@@ -36,7 +36,7 @@ pub fn check(current: &str) -> AppResult<UpdateInfo> {
         .header("User-Agent", "Veyscape")
         .header("Accept", "application/vnd.github+json")
         .call()
-        .map_err(|e| AppError::Network(e.to_string()))?
+        .map_err(call_error)?
         .into_body()
         .read_to_string()
         .map_err(|e| AppError::Network(e.to_string()))?;
@@ -47,6 +47,16 @@ pub fn check(current: &str) -> AppResult<UpdateInfo> {
         .next()
         .ok_or_else(|| AppError::Network("no releases published".into()))?;
     Ok(info(current, release))
+}
+
+/// GitHub allows about 60 anonymous API requests per hour per IP; say so instead of "http status: 403".
+fn call_error(e: ureq::Error) -> AppError {
+    match e {
+        ureq::Error::StatusCode(403 | 429) => AppError::Network(
+            "GitHub is limiting update checks from this network. Try again in an hour.".into(),
+        ),
+        e => AppError::Network(e.to_string()),
+    }
 }
 
 fn info(current: &str, release: Release) -> UpdateInfo {
@@ -93,6 +103,14 @@ mod tests {
         assert!(!info("0.2.0", r("v0.1.9")).available);
         assert!(!info("0.1.1", r("nightly")).available);
         assert_eq!(info("0.1.1", r("v0.1.2")).latest, "0.1.2");
+    }
+
+    #[test]
+    fn rate_limit_is_explained() {
+        let msg = call_error(ureq::Error::StatusCode(403)).to_string();
+        assert!(msg.contains("Try again in an hour"), "{msg}");
+        let other = call_error(ureq::Error::StatusCode(500)).to_string();
+        assert!(other.contains("http status: 500"), "{other}");
     }
 
     #[test]
